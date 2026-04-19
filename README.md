@@ -36,3 +36,4 @@ docker compose up --build
 
 `DOKUMENTACIYA_NAUCHRUK.md` — описание проекта, сценарии, глоссарий.
 # animal-shop
+# animal-shop
