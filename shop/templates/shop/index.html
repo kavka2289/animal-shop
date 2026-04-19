@@ -1,0 +1,45 @@
+{% extends "shop/base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <h1>Всё для питомцев в одном месте</h1>
+      <p class="lead">Корма, аксессуары и мелочи для ухода — загляните в каталог.</p>
+      <a class="btn btn-primary" href="{% url 'catalog' %}">Открыть каталог</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Категории</h2>
+    <div class="grid grid-cats">
+      {% for c in categories %}
+      <a class="card card-cat" href="{% url 'catalog_category' c.slug %}">
+        <h3>{{ c.name }}</h3>
+        <p>{{ c.desc }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-muted">
+  <div class="container">
+    <h2>Популярное</h2>
+    <div class="grid grid-products">
+      {% for p in featured %}
+      <article class="card card-product">
+        <a href="{% url 'product' p.id %}" class="card-product-link">
+          <div class="product-thumb product-thumb--{{ p.image }}" aria-hidden="true"></div>
+          <h3>{{ p.name }}</h3>
+          <p class="muted">{{ p.short }}</p>
+          <p class="price">{{ p.price }} ₽</p>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

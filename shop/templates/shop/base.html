@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Зоомагазин{% endblock %} — Лапа и хвост</title>
+  <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="{% url 'index' %}">Лапа и хвост</a>
+      <nav class="nav">
+        <a href="{% url 'catalog' %}">Каталог</a>
+        <a href="{% url 'about' %}">О магазине</a>
+        <a href="{% url 'contacts' %}">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>Курсовой проект: веб-приложение «магазин для животных». Данные на странице демонстрационные.</p>
+    </div>
+  </footer>
+  <script src="{% static 'shop/js/main.js' %}"></script>
+</body>
+</html>

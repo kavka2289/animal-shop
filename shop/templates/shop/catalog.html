@@ -1,0 +1,36 @@
+{% extends "shop/base.html" %}
+{% block title %}{% if current %}{{ current.name }}{% else %}Каталог{% endif %}{% endblock %}
+{% block content %}
+<div class="container section">
+  <h1>{% if current %}Категория: {{ current.name }}{% else %}Каталог{% endif %}</h1>
+  {% if current %}<p class="muted">{{ current.desc }}</p>{% endif %}
+
+  <div class="catalog-layout">
+    <aside class="catalog-filters">
+      <h2 class="h-aside">Разделы</h2>
+      <ul class="filter-list">
+        <li><a href="{% url 'catalog' %}" class="{% if not slug %}is-active{% endif %}">Все товары</a></li>
+        {% for c in categories %}
+        <li><a href="{% url 'catalog_category' c.slug %}" class="{% if slug == c.slug %}is-active{% endif %}">{{ c.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </aside>
+    <div class="catalog-main">
+      <div class="grid grid-products">
+        {% for p in products %}
+        <article class="card card-product">
+          <a href="{% url 'product' p.id %}" class="card-product-link">
+            <div class="product-thumb product-thumb--{{ p.image }}" aria-hidden="true"></div>
+            <h3>{{ p.name }}</h3>
+            <p class="muted">{{ p.short }}</p>
+            <p class="price">{{ p.price }} ₽</p>
+          </a>
+        </article>
+        {% empty %}
+        <p>В этой категории пока нет позиций (макет).</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

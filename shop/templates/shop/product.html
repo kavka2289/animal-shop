@@ -1,0 +1,33 @@
+{% extends "shop/base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<div class="container section product-page">
+  <nav class="breadcrumbs"><a href="{% url 'catalog' %}">Каталог</a> / {{ product.name }}</nav>
+  <div class="product-layout">
+    <div class="product-visual product-thumb product-thumb--{{ product.image }} product-thumb--large" aria-hidden="true"></div>
+    <div>
+      <h1>{{ product.name }}</h1>
+      <p class="muted">{{ product.short }}</p>
+      <p class="price price-large">{{ product.price }} ₽</p>
+      <p class="note">Оформление заказа в этой версии не реализовано (только интерфейс).</p>
+    </div>
+  </div>
+
+  {% if related %}
+  <section class="section-inner">
+    <h2>Из того же раздела</h2>
+    <div class="grid grid-products">
+      {% for p in related %}
+      <article class="card card-product">
+        <a href="{% url 'product' p.id %}" class="card-product-link">
+          <div class="product-thumb product-thumb--{{ p.image }}" aria-hidden="true"></div>
+          <h3>{{ p.name }}</h3>
+          <p class="price">{{ p.price }} ₽</p>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}
