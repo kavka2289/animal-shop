@@ -20,7 +20,7 @@
         {% for p in products %}
         <article class="card card-product">
           <a href="{% url 'product' p.id %}" class="card-product-link">
-            <div class="product-thumb product-thumb--{{ p.image }}" aria-hidden="true"></div>
+            <div class="product-thumb product-thumb--{{ p.image_key }}" aria-hidden="true"></div>
             <h3>{{ p.name }}</h3>
             <p class="muted">{{ p.short }}</p>
             <p class="price">{{ p.price }} ₽</p>

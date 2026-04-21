@@ -1,0 +1,17 @@
+{% extends "shop/base.html" %}
+{% block title %}Заказ оформлен{% endblock %}
+{% block content %}
+<div class="container section prose">
+  <h1>Спасибо! Заказ оформлен</h1>
+  <p>Номер заказа: <strong>#{{ order.id }}</strong></p>
+  <p class="muted">Статус: {{ order.get_status_display }}</p>
+  <h2>Состав</h2>
+  <ul>
+    {% for item in order.items.all %}
+      <li>{{ item.product.name }} — {{ item.qty }} × {{ item.price }} ₽ = {{ item.total }} ₽</li>
+    {% endfor %}
+  </ul>
+  <p><strong>Итого: {{ order.total }} ₽</strong></p>
+  <p><a class="btn btn-primary" href="{% url 'catalog' %}">Вернуться в каталог</a></p>
+</div>
+{% endblock %}

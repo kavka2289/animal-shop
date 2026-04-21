@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+{% block title %}Оформление заказа{% endblock %}
+{% block content %}
+<div class="container section">
+  <nav class="breadcrumbs"><a href="{% url 'product' product.id %}">{{ product.name }}</a> / Оформление</nav>
+  <div class="product-layout">
+    <div class="product-visual product-thumb product-thumb--{{ product.image_key }} product-thumb--large" aria-hidden="true"></div>
+    <div class="prose">
+      <h1>Оформление заказа</h1>
+      <p class="muted">{{ product.name }} — {{ product.price }} ₽</p>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Оформить</button>
+      </form>
+      <p class="note">После оформления мы отправим информацию о заказе в Telegram бота (если настроены переменные окружения).</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

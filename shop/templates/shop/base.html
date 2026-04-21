@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Зоомагазин{% endblock %} — Лапа и хвост</title>
-  <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'shop/css/style.css' %}?v=2">
 </head>
 <body>
   <header class="site-header">
@@ -15,6 +15,12 @@
         <a href="{% url 'catalog' %}">Каталог</a>
         <a href="{% url 'about' %}">О магазине</a>
         <a href="{% url 'contacts' %}">Контакты</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+          <a href="{% url 'login' %}">Войти</a>
+          <a href="{% url 'signup' %}">Регистрация</a>
+        {% endif %}
       </nav>
     </div>
   </header>
@@ -25,7 +31,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>Курсовой проект: веб-приложение «магазин для животных». Данные на странице демонстрационные.</p>
+      <p>Проект: веб-приложение «магазин для животных». Данные на странице демонстрационные.</p>
     </div>
   </footer>
   <script src="{% static 'shop/js/main.js' %}"></script>

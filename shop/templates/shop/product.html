@@ -4,12 +4,20 @@
 <div class="container section product-page">
   <nav class="breadcrumbs"><a href="{% url 'catalog' %}">Каталог</a> / {{ product.name }}</nav>
   <div class="product-layout">
-    <div class="product-visual product-thumb product-thumb--{{ product.image }} product-thumb--large" aria-hidden="true"></div>
+    <div class="product-visual product-thumb product-thumb--{{ product.image_key }} product-thumb--large" aria-hidden="true"></div>
     <div>
       <h1>{{ product.name }}</h1>
       <p class="muted">{{ product.short }}</p>
       <p class="price price-large">{{ product.price }} ₽</p>
-      <p class="note">Оформление заказа в этой версии не реализовано (только интерфейс).</p>
+      {% if user.is_authenticated %}
+        <a class="btn btn-primary" href="{% url 'checkout' product.id %}">Купить</a>
+      {% else %}
+        <p class="note">Чтобы купить, войдите в аккаунт или зарегистрируйтесь.</p>
+        <p>
+          <a class="btn btn-primary" href="{% url 'login' %}?next={% url 'checkout' product.id %}">Войти</a>
+          <a class="btn" href="{% url 'signup' %}">Регистрация</a>
+        </p>
+      {% endif %}
     </div>
   </div>
 
@@ -20,7 +28,7 @@
       {% for p in related %}
       <article class="card card-product">
         <a href="{% url 'product' p.id %}" class="card-product-link">
-          <div class="product-thumb product-thumb--{{ p.image }}" aria-hidden="true"></div>
+          <div class="product-thumb product-thumb--{{ p.image_key }}" aria-hidden="true"></div>
           <h3>{{ p.name }}</h3>
           <p class="price">{{ p.price }} ₽</p>
         </a>
